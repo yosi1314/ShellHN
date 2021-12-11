@@ -1,5 +1,5 @@
-from concurrent.futures import ThreadPoolExecutor
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import List, Callable, Dict
 from app.apis.hackernews import get_best_stories_ids, get_item_by_id
 from app.models.item import Item
@@ -7,8 +7,6 @@ from requests.models import Response
 from textwrap import TextWrapper
 from app.models.item_tree_node import ItemTreeNode
 from app.consts import hm_utils_consts as hm
-import numpy as np
-import pandas as pd
 
 
 def fetch_multiple_data(ids: List, fetch_data: Callable) -> List[Response]:
@@ -88,26 +86,3 @@ def _print_all_item_kids(item: Item, comments: Dict[int, ItemTreeNode]):
                               "- ", subsequent_indent=prefix*comment.depth + "  ")
         print(wrapper.fill(comment.item.text))
         _print_all_item_kids(comment.item, comments)
-
-
-def get_direct_children(item: Item, comments: Dict[int, ItemTreeNode], depth):
-    if not item.kids:
-        return
-    responses = fetch_multiple_data(item.kids, get_item_by_id)
-    for res in responses:
-        story = parse_item(res)
-        comments[story.id] = ItemTreeNode(item=story, depth=depth)
-
-
-def gen_correlation_plot(items: List[Item]):
-    # mat = gen_time_comment_matrix(items)
-    x = [item.time for item in items]
-    y = [item.descendants for item in items]
-    mat = np.corrcoef(x, y)
-    df = pd.DataFrame(mat)
-    print(df)
-    bla = 0
-
-
-def gen_time_comment_matrix(items: List[Item]):
-    return [(item.time, item.descendants) for item in items]
