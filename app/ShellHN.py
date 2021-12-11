@@ -1,6 +1,7 @@
 import sys
 import os
-  
+
+#Adding the working dir to PATH in order for it to work on local pc
 current = os.path.dirname(os.path.realpath(__file__))  
 parent = os.path.dirname(current)
 sys.path.append(parent)

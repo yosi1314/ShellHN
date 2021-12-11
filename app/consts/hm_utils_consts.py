@@ -16,3 +16,7 @@ DONE_FETCHING_ARTICLES = "Done fetching top rated articles."
 LOADING_COMMENTS_MSG = "Loading comments..."
 
 FAILED_LOADING_COMMENTS_MSG = "Unabled to fetch the article's comments. Please check the logs and try again later."
+
+LINE_PREFIX = "      "
+BEGIN_LINE_PREFIX = "- "
+END_LINE_PREFIX = "  "

@@ -2,7 +2,6 @@ from typing import List
 from requests import get
 from requests.models import Response
 from app.consts.hm_api_consts import BASE_URL
-
 from app.decorators.api_wrapper import parse_api_call
 
 

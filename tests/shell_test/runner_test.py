@@ -1,4 +1,5 @@
 from pytest_mock import MockerFixture
+from pytest import raises
 from app.shell.runner import run, style, questions
 
 
@@ -14,7 +15,7 @@ def test_run(mocker: MockerFixture, mock_items):
     run()
 
     get_top_rated_articles_mock.assert_called_once()
+    assert get_top_rated_articles_mock.return_value == mock_items
     prompt_mock.assert_called_once_with(questions, style=style)
     validate_user_input_mock.assert_called_once()
-    get_article_comments_mock.assert_called_once()
-
+    get_article_comments_mock.assert_called_once_with(mock_items[1])

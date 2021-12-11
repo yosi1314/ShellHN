@@ -1,9 +1,6 @@
 from PyInquirer import style_from_dict, Token, prompt
-from app.apis.hackernews import get_item_by_id
-from app.utils.hackernews import get_top_rated_articles, get_article_comments, parse_item
-
+from app.utils.hackernews import get_top_rated_articles, get_article_comments
 from app.validators.shell_validator import validate_user_input
-
 from app.consts import cmd_consts
 
 

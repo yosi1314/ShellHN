@@ -2,7 +2,7 @@ import logging
 from app.consts import validator_consts as vc, hm_utils_consts as hm
 
 
-def is_int(user_input):
+def _is_int(user_input):
     try:
         return int(user_input)
     except ValueError:
@@ -10,14 +10,14 @@ def is_int(user_input):
         return False
 
 
-def is_in_range(user_input):
+def _is_in_range(user_input):
     if user_input <= hm.DEFAULT_LIMIT and user_input > hm.MIN_RESULTS:
         return user_input
     print(vc.IS_IN_RANGE_MSG)
     return False
 
 
-_user_input_validations = [is_int, is_in_range]
+_user_input_validations = [_is_int, _is_in_range]
 
 
 def validate_user_input(answers, key, input_func, *input_func_params, **kwinput_func_params):
@@ -37,4 +37,3 @@ def validate_user_input(answers, key, input_func, *input_func_params, **kwinput_
             raise SystemExit(vc.BAD_INPUT_LOG)
         else:
             return user_input
-    
